@@ -7,13 +7,11 @@ import React, { useState, useReducer } from "react";
 
 const reducer = (state, action) => {
   console.log("reducer is working to update 'state' bank!", state, action);
-  console.log(state);
   switch (action.type) {
     case "deposit":
-      console.log(state, action.payload);
-      return Number(state + action.playload);
+      return state + action.payload;
     case "withdraw":
-      return state - action.playload;
+      return state - action.payload;
     default:
       return state;
   }
@@ -25,29 +23,34 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Thanks for visiting ABC Bank</h2>
-      <p>Balace: ${money}</p>
+      <h2 className="bank">Your ABC Bank Account</h2>
+      <p className="balance">Balace: ${money}</p>
       <input
+        placeholder="Please enter amount"
+        className="input"
         type="number"
         value={number}
         onChange={(e) => setNumber(parseInt(e.target.value))}
         step="10"
       />
-
-      <button
-        onClick={() => {
-          dispatch({ type: "deposit", payload: number });
-        }}
-      >
-        Deposit
-      </button>
-      <button
-        onClick={() => {
-          dispatch({ type: "withdraw", payload: number });
-        }}
-      >
-        Withdraw
-      </button>
+      <div className="btnContainer">
+        <button
+          className="btn"
+          onClick={() => {
+            dispatch({ type: "deposit", payload: number });
+          }}
+        >
+          Deposit
+        </button>
+        <button
+          className="btn"
+          onClick={() => {
+            dispatch({ type: "withdraw", payload: number });
+          }}
+        >
+          Withdraw
+        </button>
+      </div>
     </div>
   );
 }
